@@ -27,29 +27,34 @@ export default function Dashboard() {
     try {
       setLoading(true);
       const params = new URLSearchParams();
-      
       Object.entries(filters).forEach(([key, value]) => {
         if (value) params.append(key, value);
       });
-
       const url = `/api/dashboard${params.toString() ? '?' + params.toString() : ''}`;
-      console.log('🔗 Fazendo request para:', url);
       
       const response = await fetch(url);
-      
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.details || `Erro ${response.status}`);
+        throw new Error(errorData.details || `Erro no servidor (${response.status})`);
       }
-      
+
       const data = await response.json();
-      console.log('✅ Dados recebidos:', data);
       setDashboardData(data);
       setError(null);
       setLastUpdate(new Date());
+
     } catch (err) {
-      console.error('❌ Erro completo:', err);
-      setError(err.message);
+      console.error('❌ Erro ao buscar dados:', err);
+      
+      if (!navigator.onLine) {
+        setError('Você está offline. Verifique sua conexão com a internet.');
+      } else if (err.message.includes('Failed to fetch')) {
+        setError('A API não está disponível. Por favor, verifique se o servidor está rodando.');
+      } else {
+        setError(err.message);
+      }
+
     } finally {
       setLoading(false);
     }
@@ -234,9 +239,13 @@ export default function Dashboard() {
   if (error && !dashboardData) {
     return (
       <div className="container">
-        <div className="error">
-          <AlertTriangle size={24} />
-          <p>Erro: {error}</p>
+        <div className="error" style={{ padding: '20px', textAlign: 'center' }}>
+          <AlertTriangle size={24} style={{ marginBottom: '10px' }} />
+          <h2>Erro ao carregar dados</h2>
+          <p>{error}</p>
+          <p style={{ marginTop: '10px', fontSize: '14px', color: '#f87171' }}>
+            Dica: Certifique-se de que a API está rodando em <code>http://localhost:5046</code>
+          </p>
         </div>
       </div>
     );
