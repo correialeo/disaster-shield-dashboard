@@ -1,40 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+🛡️ DisasterShield Dashboard
+============================
 
-## Getting Started
+Dashboard de monitoramento e visualização de dados e estatísticas relacionadas a desastres ambientais, como enchentes e incêndios. Mostra alertas em tempo real com gráficos, mapas interativos e análise de risco por região.
 
-First, run the development server:
+🔧 Requisitos
+-------------
+
+Para rodar esse projeto corretamente, é necessário ter a API backend rodando primeiro.
+
+🔗 A API está disponível em:\
+👉 <https://github.com/correialeo/SCED.API>
+
+A API já possui um `README.md` explicando como configurar e rodá-la localmente.
+
+> ⚠️ Importante: Garanta que a API esteja acessível via HTTP, e não HTTPS, (ex: `http://localhost:5046`) para evitar problemas com CORS ou HTTPS durante o desenvolvimento.
+
+* * * * *
+
+▶️ Como Rodar o Projeto
+-----------------------
+
+### 1\. Clonar o repositório
+
+```bash
+git clone https://github.com/correialeo/disaster-shield-dashboard.git
+cd disaster-shield-dashboard
+```
+
+### 2\. Instalar as dependências
+
+```bash
+npm install
+```
+
+### 3\. Iniciar o servidor de desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O dashboard ficará disponível em [http://localhost:3000](http://localhost:3000/)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+* * * * *
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+📊 Funcionalidades Principais
+-----------------------------
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+-   Dados em tempo real: Atualização automática dos alertas.
+-   Filtros avançados: Data, localização e raio de busca.
+-   Gráficos interativos: Barras, linhas e pizza com estatísticas de alertas e sensores.
+-   Mapa dinâmico: Visualização de pontos de risco com marcadores coloridos.
+-   Painel de estatísticas: Número total de alertas, dispositivos ativos, abrigos e recursos.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* * * * *
 
-## Learn More
+⚙️ Configurações de Tempo Real
+------------------------------
 
-To learn more about Next.js, take a look at the following resources:
+Você pode controlar a atualização automática diretamente na interface:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+-   Habilitar/desabilitar modo tempo real
+-   Selecionar intervalo de atualização (10s, 30s, 1m, etc)
+-   Visualizar data/hora da última atualização e contagem regressiva até a próxima
